@@ -1,0 +1,9 @@
+kind: ImageSetConfiguration
+apiVersion: mirror.openshift.io/v1alpha2                                                    
+storageConfig:                                                      
+  registry:
+    imageURL: quay-enterpise.example.com/my_organization/additonalimages-metadata:latest                 
+    skipTLS: false
+mirror:
+  additonalImages:
+    - name: registry.redhat.io/redhat/ubi8/ubi:latest
