@@ -1,9 +1,9 @@
 # `oc mirror` and Quay Enterprise workflow guide for Disconnected Openshift4 Clusters
 
 ## Introduction
-  This is an oppinionated guide for  guide assumes an `ImageSetConfiguration` has already been generated and populated with content by an Administator or other 3rd party. 
+This is an oppinionated guide for  guide assumes an `ImageSetConfiguration` has already been generated and populated with content by an Administator or other 3rd party. 
 
-  As of the writing of this document, `oc-mirror` is a Red Hat supported content mirroring plugin for the opencshift cli.  `oc mirror` can be used to sync Openshift Releases, Operators, Helm chats, and additional images to a container regestry using a configuartion file, and using a backend storage mechanism allows `oc mirror` to manage the content in a declaritive manor.
+As of the writing of this document, `oc-mirror` is a Red Hat supported content mirroring plugin for the opencshift cli.  `oc mirror` can be used to sync Openshift Releases, Operators, Helm chats, and additional images to a container regestry using a configuartion file, and using a backend storage mechanism allows `oc mirror` to manage the content in a declaritive manor.
 
 
 ## Documentation 
@@ -23,9 +23,14 @@
 4. The `oc-mirror` plugin installed on your workstation enviornment using the Installation guide in the Documentation section.  Additionally, verify that you have [configured credentials](https://docs.openshift.com/container-platform/4.12/installing/disconnected_install/installing-mirroring-disconnected.html#installation-adding-registry-pull-secret_installing-mirroring-disconnected) to communicate with Quay Enterprise and the Red Hat Registry.
 
 ## Configuring an `ImageSetConfiguration`
-  `oc mirror` works by defining an `ImageSetConfiguration` which it will use to declare image sets needs to be pulled from an external source, and mirrored to, or pruned from the existing mirrored content in Qauy Enterprise.  An `ImageSetConfiguration` can mirror 4 types of images; `platform`, `operators`, `additionalImages`, and `helm` charts. Each of these image types has thier own [configuration parameters](https://docs.openshift.com/container-platform/4.12/installing/disconnected_install/installing-mirroring-disconnected.html#oc-mirror-imageset-config-params_installing-mirroring-disconnected).
+`oc mirror` works by defining an `ImageSetConfiguration` which it will use to declare image sets needs to be pulled from an external source, and mirrored to, or pruned from the existing mirrored content in Qauy Enterprise.  An `ImageSetConfiguration` can mirror 4 types of images; `platform`, `operators`, `additionalImages`, and `helm` charts. Each of these image types has thier own [configuration parameters](https://docs.openshift.com/container-platform/4.12/installing/disconnected_install/installing-mirroring-disconnected.html#oc-mirror-imageset-config-params_installing-mirroring-disconnected).
 
-  In the provided example we will mirror the Openshift `4.12.0` and `4.12.1` releases from the `fast-4.12` channel, for the `amd64` architechure and the backend will be in the `quay-enterpise.example.com/my_organization/release-metadata` repository, with the `latest` tag. 
+- **platform:** Used for mirroring Openshift Platform and Release content.
+- **operators:** Used for mirroring Operators, both Red Hat certified and upstream.
+- **additionalImages:** Used for mirroring individual container images.
+- **helm:** Used for mirroring Helm charts.
+
+In the provided example we will mirror the Openshift `4.12.0` and `4.12.1` releases from the `fast-4.12` channel, for the `amd64` architechure and the backend will be in the `quay-enterpise.example.com/my_organization/release-metadata` repository, with the `latest` tag. 
 
 ```
 kind: ImageSetConfiguration
