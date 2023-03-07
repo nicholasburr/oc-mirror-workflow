@@ -89,7 +89,7 @@ After successfully mirroring, `oc mirror` will write specific Openshift configur
   - updateService.yaml
 - **operators**
   - imageContentSourcePolicy.yaml
-  - catalogSource-redhat-operator-index.yaml
+  - catalogSource-*name-of-the-catalog*.yaml
     - Note: When syncing multiple Operator catalogs, there will be multiple `catalogSource-redhat-operator-index.yaml` files.
 - **additonalImages**
   - imageContentSourcePolicy.yaml
@@ -97,8 +97,15 @@ After successfully mirroring, `oc mirror` will write specific Openshift configur
   - TBD
 
 ## Managing `oc mirror` configuration files
+At the conclusion of the `oc mirror` sync, I recommend copying and commiting the configuration files to a Git repository.  This will allow a dedicated space to recomed changes to the configuration files over time, and centralize the configurations for your disconnected Openshift 4 clusters.
 
-Because `oc mirror` generates Openshift configuration files, I recommend breaking up the  `ImageSetConfigutation` into multiple files for organizations that are trying to manage multiple Disconnected, or Content Restricted Openshift Clusters.
+In this exampe we have 2 `catalogSource` files which are used to update resources `openshift-marketplace` project to enable use of OperatorHub. There is 1 `imageContentSourcePolicy` to direct our cluster to the offline mirror(s), and updateService.yaml to allow our cluster to use the update graphs.
 
-
-
+```
+% tree
+.
+├── catalogSource-redhat-marketplace-index.yaml
+├── catalogSource-redhat-operator-index copy.yaml
+├── imageContentSourcePolicy.yaml
+└── updateService.yaml
+```
