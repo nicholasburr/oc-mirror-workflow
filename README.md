@@ -93,6 +93,9 @@ After successfully mirroring, `oc mirror` will write specific Openshift configur
     - Note: When syncing multiple Operator catalogs, there will be multiple `catalogSource-redhat-operator-index.yaml` files.
 - **additonalImages**
   - imageContentSourcePolicy.yaml
+- **OpenShift Update Service (OSUS)**
+  - updateService.yaml
+    - Contains the graph data to enable upgrade paths with OpenShift Update Service.
 - **helm**
   - TBD
 
